@@ -2,6 +2,17 @@ from datetime import datetime
 
 # Create your models here.
 class TemperatureReport():
+    """
+    Class to manage the temperature report of each city.
+
+    attributes:
+        max_temperature: maximum temperature.
+        min_temperature: minimum temperature.
+        date: date of the temperature.
+    
+    methods:
+        get_temperatures_as_dict: get the temperatures ordered by date as dictionary.
+    """
     def __init__(self, max_temperature: float, min_temperature: float, date: int) -> None:
         self.max_temperature = max_temperature
         self.min_temperature = min_temperature    
@@ -16,6 +27,21 @@ class TemperatureReport():
         }
 
 class City():
+    """
+    Class to manage the cities.
+
+    Attributes:
+        name: name of the city.
+        latitude: latitude of the city.
+        longitude: longitude of the city.
+        temperatures: temperatures of the city.
+        error_report: error report of the city.
+
+    Methods:
+        set_error_report: set the error report of the city.
+        add_temperature_to_report: add temperature to the city.
+        get_temperatures_as_dict: get temperature elements as dictionary.
+    """
     def __init__(self, name: str, latitude: float, longitude: float) -> None:
         self.name = name
         self.latitude = latitude
@@ -38,22 +64,3 @@ class City():
         for temperature in self.temperatures:
             temp.update(temperature.get_temperatures_as_dict())
         return temp
-
-class WeatherReport():
-    def __init__(self) -> None:
-        self.cities = []
-
-    key_to_search_for_report = 'daily'
-    maximum_temperature_values_to_store = 7
-
-    def add_city(self, city: City) -> None:
-        self.cities.append(city)
-    
-    def get_cities(self) -> list:
-        return self.cities
-
-    def get_cities_report_as_dict(self) -> dict:
-        cities_report = {}
-        for city in self.cities:
-            cities_report[city.name] = city.get_temperatures_as_dict()
-        return cities_report
