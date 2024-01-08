@@ -58,4 +58,4 @@ def weather_forecast(request):
     if not weather_report.get_cities():
         return Response({ 'error': 'No cities to get weather report' }, status=404) # not found
 
-    return StreamingHttpResponse(weather_report.get_cities_temperatures_report(),status=status.HTTP_200_OK)
+    return StreamingHttpResponse(weather_report.get_cities_temperatures_report(),status=status.HTTP_200_OK, content_type='application/json')
