@@ -42,7 +42,8 @@ class WeatherReport():
             openweathermap_response = OpenWeatherMapAPI.get_response_from_city(city)
             if openweathermap_response.status_code == OpenWeatherMapAPI.account_blocked_status_code:
                 yield json.dumps({'error': 'Account blocked by openweathermap API due to exceeded the number of calls.'})
-                continue
+                yield "]"
+                return
 
             if not openweathermap_response.status_code == OpenWeatherMapAPI.expected_status_code:
                 city.set_error_report('No data provided by openweathermap api')
